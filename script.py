@@ -1,9 +1,9 @@
 import asyncio
 from telethon import TelegramClient
 
-api_id = ''
-api_hash = ''
-phone = ''
+api_id = '' #your telegram api
+api_hash = '' #your telegram api hash
+phone = '' #your number phone telegram put include code county example +8678123123123
 
 async def send_messages():
     async with TelegramClient('session_name', 'your_api', 'your_api_hash') as client:
