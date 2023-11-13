@@ -13,7 +13,20 @@ All risk are borne by the `user` when using this `program`
 pip install telethon
 ```
 
+## Setup code
 
+```python
+ all api_id and api_hash find in http://my.telegram.org/apps
+ setup your number like this +8612312312341
+ setup in code async with TelegramClient put your api and api hash too
+ setup delay for send message recomended in 6-10 for not getting banned 
+```
+
+
+
+
+
+ 
 ### Run it on your terminal
 ```sh
 python script.py
