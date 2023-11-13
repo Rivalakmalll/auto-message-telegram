@@ -6,11 +6,7 @@ With this collection you can be continuous and unlimited,
 <h1 style="text-align: center;"><span style="color: #993300;">How To Run This Program?</h1>
 	<li><span style="color: #808080;">First intall lastest python here https://www.python.org/</span></li>
  <li><span style="color: #808080;">Install telethon </span></li>
-	```
-# Program to send bulk customized messages through Telegram Desktop application
-# Author @inforkgodara
-
-import pyautogui
+```import pyautogui
 import pandas
 import time
 
