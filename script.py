@@ -1,23 +1,47 @@
 import asyncio
+import random
 from telethon import TelegramClient
+from telethon.errors import FloodWaitError, UsernameNotOccupiedError
 
-api_id = '24400448'
-api_hash = 'aaab42191b59530107d5554736c9e148'
-phone = '+6289525229836'
+api_id = ''
+api_hash = ''
+phone = ''
+group_links = [
+    '',
+    '',
+    '',
+    ''
+] #put your link group here!!
 
 async def send_messages():
-    async with TelegramClient('session_name', '24400448', 'aaab42191b59530107d5554736c9e148') as client:
+    async with TelegramClient('session_name', api_id, api_hash) as client:
         await client.start(phone)
-        group_entity = await client.get_input_entity('@LPM_BBG_MMK_DDK_BBB')
-        group_entity = await client.get_input_entity('t.me/LPM_DDK_BBG_BBB_MMK')
-        group_entity = await client.get_input_entity('https://t.me/BBG_DDK_RPRL')
-        group_entity = await client.get_input_entity('https://t.me/BBG_DDK_RPRL')
-        group_entity = await client.get_input_entity('https://t.me/lpm_bbg_ddk')
-        message = "Need bbg rprl chat aja sini @onlyskyy2"
-
-        while True:  # Infinite loop
-            await client.send_message(group_entity, message)
-            await asyncio.sleep(8)
+        while True:
+            for link in group_links:
+                try:
+                    # Get entity information
+                    group_entity = await client.get_entity(link)
+                    
+                    # Log the name/title of the group
+                    if hasattr(group_entity, 'title'):
+                        print(f"Sending message to: {group_entity.title}")
+                    else:
+                        print(f"Sending message to: {link}")
+                    
+                    # Send message to the group
+                    message = "your message here" #input you message here
+                    await client.send_message(group_entity, message)
+                    await asyncio.sleep(random.uniform(30, 60))  # Randomize delay between messages (30-60 seconds)
+                except UsernameNotOccupiedError as e:
+                    print(f"Username not found error for {link}: {e}")
+                    # Handle username not found error
+                except FloodWaitError as e:
+                    print(f"Hit FloodWaitError for {link}: {e}")
+                    await asyncio.sleep(e.seconds + random.uniform(5, 10))  # Wait for suggested time + additional random time
+                except Exception as e:
+                    print(f"Error occurred for {link}: {e}")
+                    # Handle other exceptions if needed
+            await asyncio.sleep(30)  # Cooldown between loops
 
 async def main():
     await send_messages()
